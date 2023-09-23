@@ -1,11 +1,16 @@
-
+import { Table } from "./Table";
 export const RankingPage = () => {
   return (
-   <>
- <h1 className="">
-    RAnking page
- </h1>
-   
-   </>
-  )
-}
+    <>
+      <div>
+        <h1 className="text-3xl font-semibold  ">
+          India ESG Rankings 2023: University
+        </h1>
+      </div>
+
+      <div>
+        <Table />
+      </div>
+    </>
+  );
+};
