@@ -2,11 +2,15 @@ const mongoose = require("mongoose");
 
 const parameterSchema = new mongoose.Schema({
   name: String,
-  about: String,
-  rating: {
-    type: Number,
-    min: 1,
-    max: 5,
+  prevYear: Number,
+  currentYear:Number,
+  prevYearTotal:Number,
+  currentYearTotal:Number,
+  TotalUsers:Number,
+  Score: Number,
+  Quantity: {
+    weight: Number,
+    units: String,
   },
 });
 

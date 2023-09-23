@@ -5,7 +5,7 @@ const collegeSchema = new mongoose.Schema({
   name: String,
   city: String,
   state: String,
-  parameters: [{ type: Schema.Types.ObjectId, ref: "Parameter" }], // Reference to Parameter documents
+  parameters: [{ type: Schema.Types.ObjectId, ref: "Parameter" }], 
 });
 
 const College = mongoose.model("College", collegeSchema);

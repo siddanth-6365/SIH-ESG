@@ -49,7 +49,7 @@ export const HomePage = () => {
   return (
     <>
     <div id="HomepageDiv">
-      <header>
+      {/* <header>
         <h2 className= "logo">Logo</h2>
         <nav className= "navigation">
             <a href ="#">Home</a>
@@ -58,7 +58,7 @@ export const HomePage = () => {
             <a href = "/newsletter">Newsletter</a>
             <a href = "#">Become a member</a>
         </nav>
-    </header>
+    </header> */}
       <section className="parallax">
         <img src={hill1} alt="Hill 1" id="hill1" />
         <img src={hill2} alt="Hill 2" id="hill2" />
@@ -67,6 +67,7 @@ export const HomePage = () => {
         <img src={hill5} alt="Hill 5" id="hill5" />
         <img src={tree} alt="Tree" id="tree" />
         <h2 id="text">NISHE</h2>
+        
         <img src={leaf} alt="Leaf" id="leaf" />
         <img src={plant} alt="Plant" id="plant" />
       </section>
