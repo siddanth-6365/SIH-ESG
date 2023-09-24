@@ -2,44 +2,54 @@ import React from "react";
 
 const Carousel = () => {
   return (
-    <div id="default-carousel" className="relative w-full bg-gray-400" data-carousel="slide">
-      <div className="relative h-64 overflow-hidden rounded-lg md:h-96">
+    <div
+      id="default-carousel"
+      className="relative w-full"
+      data-carousel="slide"
+    >
+      <div className="relative h-56 overflow-hidden rounded-lg md:h-96 bg-gray-400">
+        {/* Item 1 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://picsum.photos/400/300/?image=926"
+            src="https://img.collegepravesh.com/2015/12/JIIT-Noida.jpg"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
+            alt="Slide 1"
           />
         </div>
+        {/* Item 2 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="/docs/images/carousel/carousel-2.svg"
+               src="https://img.collegepravesh.com/2015/12/JIIT-Noida.jpg"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
+            alt="Slide 2"
           />
         </div>
+        {/* Item 3 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://picsum.photos/400/300/?image=925"
+            src="https://via.placeholder.com/400x300.png?text=Slide%203"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
+            alt="Slide 3"
           />
         </div>
+        {/* Item 4 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="/docs/images/carousel/carousel-4.svg"
+            src="https://via.placeholder.com/400x300.png?text=Slide%204"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
+            alt="Slide 4"
           />
         </div>
+        {/* Item 5 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="/docs/images/carousel/carousel-5.svg"
+            src="https://via.placeholder.com/400x300.png?text=Slide%205"
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-            alt="..."
+            alt="Slide 5"
           />
         </div>
       </div>
+      {/* Slider indicators */}
       <div className="absolute z-30 flex space-x-3 -translate-x-1/2 bottom-5 left-1/2">
         <button
           type="button"
@@ -77,6 +87,7 @@ const Carousel = () => {
           data-carousel-slide-to="4"
         ></button>
       </div>
+      {/* Slider controls */}
       <button
         type="button"
         className="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"

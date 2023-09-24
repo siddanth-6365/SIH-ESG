@@ -8,15 +8,25 @@ export function useParameterContext() {
 
 export function ParameterProvider({ children }) {
   const [parameters, setParameters] = useState([]);
+  const [collegeInfo, setCollegeInfo] = useState({}); 
+  const [CampusUsers, setCampusUsers] = useState({}); 
+
 
   const addParameter = (parameter) => {
     setParameters([...parameters, parameter]);
   };
 
-  // Add other functions to modify parameters as needed
+  const updateCollegeInfo = (info) => {
+    setCollegeInfo(info);
+  };
+
+  const addCampusUsers = (val) => {
+    setCampusUsers(val);
+  };
+
 
   return (
-    <ParameterContext.Provider value={{ parameters, addParameter }}>
+    <ParameterContext.Provider value={{ parameters, addParameter, collegeInfo, updateCollegeInfo,addCampusUsers }}>
       {children}
     </ParameterContext.Provider>
   );

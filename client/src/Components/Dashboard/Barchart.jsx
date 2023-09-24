@@ -5,19 +5,7 @@ import { Chart as ChartJS, BarElement, CategoryScale, LinearScale, Tooltip, Lege
 // Register the required Chart.js components
 ChartJS.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-export const Barchart = () => {
-  const data = {
-    labels: ["p1", "p2", "p3", "p4", "p5","p6" ],
-    datasets: [
-      {
-        label: "1",
-        data: [3, 6, 8, 5,10,4],
-        backgroundColor: ["#618265", "green", "blue", "orange","lightgreen","lightblue"], // Set different colors for each bar
-        borderColor: "black",
-        borderWidth: 1.2,
-      },
-    ],
-  };
+export const Barchart = (props) => {
 
   const options = {
     scales: {
@@ -28,11 +16,14 @@ export const Barchart = () => {
       },
     },
   };
+  const dataArr = props.dataObj;
 
   return (
     <>
       <div>
-        <Bar data={data} options={options} />
+      <Bar data={dataArr} options={options}  />
+      <h1 className="text-center font-semibold  mr-6 mt-4 text-3xl ">Parameters Score</h1>
+      
       </div>
     </>
   );

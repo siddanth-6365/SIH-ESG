@@ -3,50 +3,79 @@ import { Barchart } from "./Barchart";
 import { Piechart } from "./Piechart";
 import Carousel from "./Carousel";
 import { Testmonials } from "./Testmonials";
-import { Navbar } from "../Navbar/Navbar";
+// import { Navbar } from "../Navbar/Navbar";
 
 export const Dashboard = () => {
   let { id } = useParams();
 
+  const BarchartdataObj = 
+    {
+    labels: ["waste", "water", "co2", "GreenHouse", "Renewable","Sustainable" ],
+    datasets: [
+      {
+        label: "1",
+        data: [3, 6, 8, 5,10,4],
+        backgroundColor: ["#618265", "green", "blue", "orange","lightgreen","lightblue"], // Set different colors for each bar
+        borderColor: "black",
+        borderWidth: 1.2,
+      },
+    ]
+  };
+
+  const CarouselImageSrc=["","","",""];
+
+  const PieChartdataObj = {
+    labels: ['co2','water','Sustainable'],
+    datasets: [{
+        label:'Poll',
+        data: [3,7,4],
+        backgroundColor: ["red", "green","orange"],
+        borderColor: "black",
+        borderWidth: 1.2,
+    }]
+  };
+
+  const TestmonialsObj={
+
+  };
+  const counters = document.querySelectorAll('.value');
+const speed = 200;
+
+counters.forEach( counter => {
+   const animate = () => {
+      const value = +counter.getAttribute('akhi');
+      const data = +counter.innerText;
+     
+      const time = value / speed;
+     if(data < value) {
+          counter.innerText = Math.ceil(data + time);
+          setTimeout(animate, 1);
+        }else{
+          counter.innerText = value;
+        }
+     
+   }
+   
+   animate();
+});
+
   return (
     <>
       <div className="p-2">
-        <div className="p-4 m-4">
+        <div className="p-4 m-4 font-semibold underline underline-offset-4 text-2xl text-center">
           <h2>Display data for institution with ID: {id}</h2>
         </div>
 
         <div className="w-full flex">
           <div id="left-leftDiv" className="w-[12%] ">
-            <button
-              data-drawer-target="default-sidebar"
-              data-drawer-toggle="default-sidebar"
-              aria-controls="default-sidebar"
-              type="button"
-              className="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            >
-              <span className="sr-only">Open sidebar</span>
-              <svg
-                className="w-6 h-6"
-                aria-hidden="true"
-                fill="currentColor"
-                viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  clip-rule="evenodd"
-                  fill-rule="evenodd"
-                  d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-                ></path>
-              </svg>
-            </button>
-
+        
             <aside
               id="default-sidebar"
-              className="fixed top-0 left-0 z-40 w-32 h-screen transition-transform -translate-x-full sm:translate-x-0"
+              className="fixed top-0  left-0 z-40 w-32 h-screen transition-transform -translate-x-full sm:translate-x-0"
               aria-label="Sidebar"
             >
-              <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-                <ul className="space-y-2 font-medium">
+              <div className="h-full px-3 py-4  overflow-y-auto bg-gray-50 dark:bg-gray-800">
+                <ul className="space-y-2  font-medium">
                   <li>
                     <a
                       href="#"
@@ -138,11 +167,12 @@ export const Dashboard = () => {
                 </ul>
               </div>
             </aside>
+         
           </div>
 
           <div id="leftDiv" className="w-[58%] flex flex-col ">
-            <div className="h-[500px] w-[750px]   ">
-              <Barchart />
+            <div className="h-[450px] w-[750px]   ">
+              <Barchart dataObj={BarchartdataObj} />
             </div>
 
             <div className="mt-16 ">
@@ -155,17 +185,20 @@ export const Dashboard = () => {
 
           <div id="rightDiv" className=" flex flex-col ml-8 ">
             <div className="h-[400px] w-[450px]  ">
-              <Piechart />
+              <Piechart dataObj={PieChartdataObj} />
             </div>
+
             <div className="flex flex-col mt-32 ">
               <div className=" h-[200px] w-[350px] ">
                 <a
                   href="#"
                   className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                  {/* <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Noteworthy technology acquisitions 2021
-                  </h5>
+                  </h5> */}
+                   <div className="value text-2xl font-semibold" akhi="2500"> 0   <span>+ </span></div>
+                  
                   <p className="font-normal text-gray-700 dark:text-gray-400">
                     Here are the biggest enterprise technology acquisitions of
                     2021 so far, in reverse chronological order.
