@@ -1,63 +1,103 @@
 import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Barchart } from "./Barchart";
 import { Piechart } from "./Piechart";
 import Carousel from "./Carousel";
 import { Testmonials } from "./Testmonials";
 // import { Navbar } from "../Navbar/Navbar";
+import axios from "axios";
 
 export const Dashboard = () => {
   let { id } = useParams();
 
-  const BarchartdataObj = 
-    {
-    labels: ["waste", "water", "co2", "GreenHouse", "Renewable","Sustainable" ],
+  const [collegesArr, setColleges] = useState([]);
+  const [Barchartlabels, setBarchartLabels] = useState([]);
+  const [Barchartdata, setBarchartData] = useState([]);
+  const [PieChartLabels, setPieChartLabels] = useState([]);
+  const [PieChartData, setPieChartData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`/api/colleges/${id}`)
+      .then((response) => {
+        setColleges(response.data);
+        
+        const parameterArray = response.data.parameter;
+        const labels1 = parameterArray.map((parameter) => parameter.name);
+        const data1 = parameterArray.map((parameter) => parameter.Score);
+
+        setBarchartLabels(labels1);
+        setBarchartData(data1);
+
+        const topTwoParameters = parameterArray.slice(0, 3);
+
+        const labels2 = topTwoParameters.map((parameter) => parameter.name);
+        const data2 = topTwoParameters.map((parameter) => parameter.Score);
+        
+        setPieChartLabels(labels2);
+        setPieChartData(data2);
+      })
+      .catch((error) => {
+        console.error("Error fetching colleges:", error);
+      });
+  }, [id]);
+
+  const BarchartdataObj = {
+    labels: Barchartlabels,
     datasets: [
       {
         label: "1",
-        data: [3, 6, 8, 5,10,4],
-        backgroundColor: ["#618265", "green", "blue", "orange","lightgreen","lightblue"], // Set different colors for each bar
+        data: Barchartdata,
+        backgroundColor: [
+          "#618265",
+          "green",
+          "blue",
+          "orange",
+          "lightgreen",
+          "lightblue",
+        ], // Set different colors for each bar
         borderColor: "black",
         borderWidth: 1.2,
       },
-    ]
+    ],
   };
 
-  const CarouselImageSrc=["","","",""];
+  const CarouselImageSrc = ["", "", "", ""];
 
   const PieChartdataObj = {
-    labels: ['co2','water','Sustainable'],
-    datasets: [{
-        label:'Poll',
-        data: [3,7,4],
-        backgroundColor: ["red", "green","orange"],
+    labels: PieChartLabels,
+    datasets: [
+      {
+        label: "Poll",
+        data:PieChartData,
+        backgroundColor: ["red", "green", "orange"],
         borderColor: "black",
         borderWidth: 1.2,
-    }]
+      },
+    ],
   };
 
-  const TestmonialsObj={
+  const TestmonialsObj = {};
+  //   const counters = document.querySelectorAll('.value');
+  // const speed = 200;
 
-  };
-//   const counters = document.querySelectorAll('.value');
-// const speed = 200;
+  // counters.forEach( counter => {
+  //    const animate = () => {
+  //       const value = +counter.getAttribute('akhi');
+  //       const data = +counter.innerText;
 
-// counters.forEach( counter => {
-//    const animate = () => {
-//       const value = +counter.getAttribute('akhi');
-//       const data = +counter.innerText;
-     
-//       const time = value / speed;
-//      if(data < value) {
-//           counter.innerText = Math.ceil(data + time);
-//           setTimeout(animate, 1);
-//         }else{
-//           counter.innerText = value;
-//         }
-     
-//    }
-   
-//    animate();
-// });
+  //       const time = value / speed;
+  //      if(data < value) {
+  //           counter.innerText = Math.ceil(data + time);
+  //           setTimeout(animate, 1);
+  //         }else{
+  //           counter.innerText = value;
+  //         }
+
+  //    }
+
+  //    animate();
+  // });
 
   return (
     <>
@@ -68,7 +108,6 @@ export const Dashboard = () => {
 
         <div className="w-full flex">
           <div id="left-leftDiv" className="w-[12%] ">
-        
             <aside
               id="default-sidebar"
               className="fixed top-0  left-0 z-40 w-32 h-screen transition-transform -translate-x-full sm:translate-x-0"
@@ -167,7 +206,6 @@ export const Dashboard = () => {
                 </ul>
               </div>
             </aside>
-         
           </div>
 
           <div id="leftDiv" className="w-[58%] flex flex-col ">
@@ -185,7 +223,7 @@ export const Dashboard = () => {
 
           <div id="rightDiv" className=" flex flex-col ml-8 ">
             <div className="h-[400px] w-[450px]  ">
-              <Piechart dataObj={PieChartdataObj} />
+              <Piechart dataObj={PieChartdataObj} TotalScore={collegesArr.TotalScore} />
             </div>
 
             <div className="flex flex-col mt-32 ">
@@ -197,7 +235,7 @@ export const Dashboard = () => {
                   {/* <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Noteworthy technology acquisitions 2021
                   </h5> */}
-                   <div className="text-2xl font-semibold" >1500 +</div>
+                  <div className="text-2xl font-semibold">1500 +</div>
                   Student surveyed
                 </a>
               </div>

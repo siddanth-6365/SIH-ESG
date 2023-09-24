@@ -20,11 +20,13 @@ function CollegeDetails() {
     setFormData({ ...formData, [name]: value });
   };
 
+  
+  
   const handleClick = () => {
     const collegedata={
       name: formData.name,
       collegeAddress: formData.collegeAddress,
-      collegeId: formData.collegeId,
+      id: formData.collegeId,
       city: formData.city,
       state: formData.state,
     }

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParameterContext } from "./Context/Parameters";
+import axios from "axios";
 
 function Griha() {
   const navigate = useNavigate();
@@ -30,6 +31,17 @@ function Griha() {
 
     // connect with api :
     console.log("parameter :", parameters, " college :", collegeInfo);
+    
+    collegeInfo.push(parameters);
+
+    axios
+      .post("/api/colleges/create", collegeInfo)
+      .then((response) => {
+        console.log(response.data.message); // College created successfully
+      })
+      .catch((error) => {
+        console.error("Error creating college:", error);
+      });
 
     alert("done, your college registered successfully, thanks you");
 

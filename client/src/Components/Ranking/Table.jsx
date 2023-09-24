@@ -1,51 +1,69 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export const Table = () => {
   const navigate = useNavigate();
+  const [collegesArr, setColleges] = useState([]);
 
-  const RowData = [
-    {
-      id: "JIIT62",
-      name: "Jaypee institute of information technology Sector-62",
-      state: "UP",
-      city: "Noida",
-      score: "98",
-      rank: "1",
-    },
-    {
-      id:"JSS",
-      name:"Jagadguru Sri Shivarathreeshwara Academy of Technical Education",
-      state:"UP",
-      city:"Noida",
-      score:"78",
-      rank:"2"
-      },
-    {
-      id: "JIIT128",
-      name: "Jaypee institute of information technology Sector-128",
-      state: "UP",
-      city: "Noida",
-      score: "75",
-      rank: "3",
-    },
-    {
-      id:"GLBAJAJ",
-      name:"GL Bajaj Institute of Technology and Management",
-      state:"UP",
-      city:"Greater Noida",
-      score:"70",
-      rank:"4"
-      },
-      {
-        id:"GLD",
-        name:"Galgotias College of Engineering & Technology",
-        state:"UP",
-        city:"Greater Noida",
-        score:"54",
-        rank:"5"
-        }
- 
-  ];
+  useEffect(() => {
+    axios
+      .get("/api/colleges")
+      .then((response) => {
+        setColleges(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching colleges:", error);
+      });
+  }, []);
+
+  function getScore(arr) {}
+
+  const RowData = collegesArr;
+
+  // const RowData = [
+  //   {
+  //     id: "JIIT62",
+  //     name: "Jaypee institute of information technology Sector-62",
+  //     state: "UP",
+  //     city: "Noida",
+  //     score: "98",
+  //     rank: "1",
+  //   },
+  //   {
+  //     id:"JSS",
+  //     name:"Jagadguru Sri Shivarathreeshwara Academy of Technical Education",
+  //     state:"UP",
+  //     city:"Noida",
+  //     score:"78",
+  //     rank:"2"
+  //     },
+  //   {
+  //     id: "JIIT128",
+  //     name: "Jaypee institute of information technology Sector-128",
+  //     state: "UP",
+  //     city: "Noida",
+  //     score: "75",
+  //     rank: "3",
+  //   },
+  //   {
+  //     id:"GLBAJAJ",
+  //     name:"GL Bajaj Institute of Technology and Management",
+  //     state:"UP",
+  //     city:"Greater Noida",
+  //     score:"70",
+  //     rank:"4"
+  //     },
+  //     {
+  //       id:"GLD",
+  //       name:"Galgotias College of Engineering & Technology",
+  //       state:"UP",
+  //       city:"Greater Noida",
+  //       score:"54",
+  //       rank:"5"
+  //       }
+
+  // ];
 
   const handleClick = (id) => {
     navigate(`/dashboard/${id}`);
@@ -134,7 +152,7 @@ export const Table = () => {
               return (
                 <tr
                   className="bg-white border-b dark:bg-gray-800 cursor-pointer dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
-                  onClick={() => handleClick(1234)}
+                  onClick={() => handleClick(clg.id)}
                   key={index}
                 >
                   <td className="px-6 py-4">{clg.id}</td>
@@ -146,8 +164,11 @@ export const Table = () => {
                   </th>
                   <td className="px-6 py-4">{clg.state}</td>
                   <td className="px-6 py-4">{clg.city}</td>
-                  <th className="px-6 py-4">{clg.score}</th>
-                  <th className="px-6 py-4">{clg.rank}</th>
+                  <th className="px-6 py-4">
+                  {clg.TotalScore}
+                  </th>
+
+                  <th className="px-6 py-4">{index + 1}</th>
                 </tr>
               );
             })}

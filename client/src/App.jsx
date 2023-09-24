@@ -5,7 +5,7 @@ import { Navbar } from "./Components/Navbar/Navbar";
 import { RankingPage } from "./Components/Ranking/RankingPage";
 import { HomePage } from "./Components/Home/HomePage";
 import { Parameter } from "./Components/Parameters/Parameter";
-import { NewsletterPage } from "./Components/Newsletter/NewsletterPage";
+import  NewsletterPage  from "./Components/Newsletter/NewsletterPage";
 import { faqsPage as FAQSPage } from "./Components/FAQS/faqsPage";
 import { Dashboard } from "./Components/Dashboard/Dashboard";
 import WasteManagement from "./Components/Forms/WasteManagement";
@@ -18,8 +18,11 @@ import Water from "./Components/Forms/Water";
 import Student from "./Components/Forms/Student";
 import Griha from "./Components/Forms/Griha";
 import { ParameterProvider } from "./Components/Forms/Context/Parameters";
+import axios from "axios"
 
 function App() {
+  axios.defaults.baseURL = "http://localhost:3030";
+  axios.defaults.withCredentials = true;
   return (
     <>
       <Navbar />
