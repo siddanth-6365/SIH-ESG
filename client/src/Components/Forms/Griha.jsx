@@ -34,14 +34,14 @@ function Griha() {
     
     collegeInfo.push(parameters);
 
-    axios
-      .post("/api/colleges/create", collegeInfo)
-      .then((response) => {
-        console.log(response.data.message); // College created successfully
-      })
-      .catch((error) => {
-        console.error("Error creating college:", error);
-      });
+    // axios
+    //   .post("/api/colleges/create", collegeInfo)
+    //   .then((response) => {
+    //     console.log(response.data.message); // College created successfully
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error creating college:", error);
+    //   });
 
     alert("done, your college registered successfully, thanks you");
 

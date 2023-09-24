@@ -4,5 +4,7 @@
   text-align: center;
 }
 
-
+body{
+  scroll-behavior: smooth;
+}
 

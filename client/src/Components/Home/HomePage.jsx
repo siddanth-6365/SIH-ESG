@@ -67,12 +67,21 @@ export const HomePage = () => {
           <img src={hill4} id="hill4" alt="Hill 4" />
           <img src={hill5} id="hill5" alt="Hill 5" />
           <img src={tree} id="tree" alt="Tree" />
-          <h2 id="text">
-            NISHE
+
+          <div id="text">
+            {/* <div>
+              <img src={Logo} style={{height:"80px" ,width:"90px"}} />
+              </div> */}
+    <div>
+           <h2 id="texthead">NISHE</h2> 
+           </div>
+           <div>
             <p id="fullFormText">
               (National Initiative for Sustainability in Higher Education)
             </p>
-          </h2>
+            </div>
+          </div>
+
           <img src={leaf} id="leaf" alt="Leaf" />
           <img src={plant} id="plant" alt="Plant" />
         </section>

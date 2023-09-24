@@ -1,10 +1,9 @@
 // App.jsx
-import React from "react";
 import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom";
 import { Navbar } from "./Components/Navbar/Navbar";
 import { RankingPage } from "./Components/Ranking/RankingPage";
 import { HomePage } from "./Components/Home/HomePage";
-import { Parameter } from "./Components/Parameters/Parameter";
+import  Parameter  from "./Components/Parameters/Parameter";
 import  NewsletterPage  from "./Components/Newsletter/NewsletterPage";
 import { faqsPage as FAQSPage } from "./Components/FAQS/faqsPage";
 import { Dashboard } from "./Components/Dashboard/Dashboard";
@@ -19,6 +18,7 @@ import Student from "./Components/Forms/Student";
 import Griha from "./Components/Forms/Griha";
 import { ParameterProvider } from "./Components/Forms/Context/Parameters";
 import axios from "axios"
+
 
 function App() {
   axios.defaults.baseURL = "http://localhost:3030";

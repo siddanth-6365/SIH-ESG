@@ -2,8 +2,9 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Barchart } from "./Barchart";
 import { Piechart } from "./Piechart";
-import Carousel from "./Carousel";
+import { Carousel } from "./Carousel";
 import { Testmonials } from "./Testmonials";
+import { TipsPage } from "./TipsPage";
 // import { Navbar } from "../Navbar/Navbar";
 import axios from "axios";
 
@@ -21,7 +22,7 @@ export const Dashboard = () => {
       .get(`/api/colleges/${id}`)
       .then((response) => {
         setColleges(response.data);
-        
+
         const parameterArray = response.data.parameter;
         const labels1 = parameterArray.map((parameter) => parameter.name);
         const data1 = parameterArray.map((parameter) => parameter.Score);
@@ -33,7 +34,7 @@ export const Dashboard = () => {
 
         const labels2 = topTwoParameters.map((parameter) => parameter.name);
         const data2 = topTwoParameters.map((parameter) => parameter.Score);
-        
+
         setPieChartLabels(labels2);
         setPieChartData(data2);
       })
@@ -41,6 +42,20 @@ export const Dashboard = () => {
         console.error("Error fetching colleges:", error);
       });
   }, [id]);
+  const barGraphColors = [
+    "#70efde",
+    "#005457",
+    "#30009c",
+    "#2ECC40",
+    "#018786",
+    "#5600e8",
+    "#01a299",
+    "#7f39fb",
+    "#00c4b4",
+    "#bb86fc",
+    
+    
+  ];
 
   const BarchartdataObj = {
     labels: Barchartlabels,
@@ -48,29 +63,27 @@ export const Dashboard = () => {
       {
         label: "1",
         data: Barchartdata,
-        backgroundColor: [
-          "#618265",
-          "green",
-          "blue",
-          "orange",
-          "lightgreen",
-          "lightblue",
-        ], // Set different colors for each bar
+        backgroundColor:barGraphColors,
         borderColor: "black",
         borderWidth: 1.2,
       },
     ],
   };
 
-  const CarouselImageSrc = ["", "", "", ""];
+  const CarouselImageSrc = [
+    "https://www.jiit.ac.in/jiit/amn/img/10.jpg",
+    "https://www.jiit.ac.in/sites/default/files/home-banner-1.jpg",
+    "https://images.shiksha.com/mediadata/images/1587371272phpazaLze.jpeg",
+    "https://qph.cf2.quoracdn.net/main-qimg-5e0770984e5346f22327ee029298137b-lq",
+  ];
 
   const PieChartdataObj = {
     labels: PieChartLabels,
     datasets: [
       {
         label: "Poll",
-        data:PieChartData,
-        backgroundColor: ["red", "green", "orange"],
+        data: PieChartData,
+        backgroundColor: ["#03dcc6", "#dbb2ff", "#985eff"],
         borderColor: "black",
         borderWidth: 1.2,
       },
@@ -113,7 +126,7 @@ export const Dashboard = () => {
               className="fixed top-0  left-0 z-40 w-32 h-screen transition-transform -translate-x-full sm:translate-x-0"
               aria-label="Sidebar"
             >
-              <div className="h-full px-3 py-4  overflow-y-auto bg-gray-50 dark:bg-gray-800">
+              <div className="h-full px-3 py-4  overflow-y-auto bg-gray-200 dark:bg-gray-800">
                 <ul className="space-y-2  font-medium">
                   <li>
                     <a
@@ -139,13 +152,13 @@ export const Dashboard = () => {
                       </svg>
 
                       <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                        Pro
+                        Home
                       </span>
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="#TipPage"
                       className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                     >
                       <svg
@@ -159,13 +172,13 @@ export const Dashboard = () => {
                       </svg>
 
                       <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                        Pro
+                        Tips
                       </span>
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href="#Review"
                       className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                     >
                       <svg
@@ -179,7 +192,7 @@ export const Dashboard = () => {
                       </svg>
 
                       <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                        Pro
+                        reviews
                       </span>
                     </a>
                   </li>
@@ -216,14 +229,17 @@ export const Dashboard = () => {
             <div className="mt-16 ">
               <div className=" flex flex-wrap w-[800px] border rounded-lg md:mb-12 md:grid-cols-2">
                 {/* carousel */}
-                <Carousel />
+                <Carousel items={CarouselImageSrc} />
               </div>
             </div>
           </div>
 
           <div id="rightDiv" className=" flex flex-col ml-8 ">
             <div className="h-[400px] w-[450px]  ">
-              <Piechart dataObj={PieChartdataObj} TotalScore={collegesArr.TotalScore} />
+              <Piechart
+                dataObj={PieChartdataObj}
+                TotalScore={collegesArr.TotalScore}
+              />
             </div>
 
             <div className="flex flex-col mt-32 ">
@@ -245,11 +261,11 @@ export const Dashboard = () => {
                   className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
                 >
                   <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    Noteworthy technology acquisitions 2021
+                    Green college since 2010
                   </h5>
                   <p className="font-normal text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology acquisitions of
-                    2021 so far, in reverse chronological order.
+                    this was Lorem ipsum dolor sit amet consectetur adipisicing
+                    elit. Dolor
                   </p>
                 </a>
               </div>
@@ -257,8 +273,13 @@ export const Dashboard = () => {
           </div>
         </div>
 
-        {/* newpage */}
-        <div className=" ml-36 p-2">
+        {/* tips page */}
+        <div id="TipPage">
+          <TipsPage />
+        </div>
+
+        {/*      Testmonials page */}
+        <div id="Review" className=" ml-36 p-2">
           <Testmonials />
         </div>
       </div>
