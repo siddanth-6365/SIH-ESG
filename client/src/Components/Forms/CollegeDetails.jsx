@@ -4,7 +4,7 @@ import { useParameterContext } from './Context/Parameters';
 
 function CollegeDetails() {
   const navigate = useNavigate();
-  const { addParameter } = useParameterContext();
+  const { setCollegeInfofun } = useParameterContext();
 
   const [formData, setFormData] = useState({
     name: '',
@@ -21,10 +21,14 @@ function CollegeDetails() {
   };
 
   const handleClick = () => {
-    // Add the formData to the context
-    addParameter(formData);
-
-    // Navigate to the next page
+    const collegedata={
+      name: formData.name,
+      collegeAddress: formData.collegeAddress,
+      collegeId: formData.collegeId,
+      city: formData.city,
+      state: formData.state,
+    }
+    setCollegeInfofun(collegedata);
     navigate('/form/campususer');
   };
 

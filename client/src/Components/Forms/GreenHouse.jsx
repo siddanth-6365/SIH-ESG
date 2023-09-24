@@ -1,10 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useParameterContext } from "./Context/Parameters";
 
 function GreenHouse() {
   const navigate = useNavigate();
-  const { addParameter } = useParameterContext();
+  const { addParameter, CampusUsers } = useParameterContext();
 
   const [formData, setFormData] = useState({
     grossScope1StationaryCombustionYear1: 0,
@@ -26,37 +26,39 @@ function GreenHouse() {
   };
 
   const handleClick = () => {
-    // Calculate the total for 2022
+    
     const total2022 =
       formData.grossScope1StationaryCombustionYear1 +
       formData.grossScope1OtherSourcesYear1 +
       formData.grossScope2ImportedElectricityYear1 +
       formData.grossScope2ImportedThermalEnergyYear1;
 
-    // Calculate the total for 2023
     const total2023 =
       formData.grossScope1StationaryCombustionYear2 +
       formData.grossScope1OtherSourcesYear2 +
       formData.grossScope2ImportedElectricityYear2 +
       formData.grossScope2ImportedThermalEnergyYear2;
 
-    // Create the parameter object for 2022 and 2023
-    const parameter2022 = {
-      name: "2022 Greenhouse Gas Emissions",
-      year: 2022,
-      Score: total2022,
+    let score2022 = total2022 / CampusUsers;
+    let score2023 = total2023 / CampusUsers;
+    let score;
+    if (score2022 > score2023) {
+      score = (score2022 - score2023) * 10;
+    } else {
+      score = 0;
+    }
+
+    const parameterObj = {
+      name: "GreenHouse",
+      Score: score,
     };
 
-    const parameter2023 = {
-      name: "2023 Greenhouse Gas Emissions",
-      year: 2023,
-      Score: total2023,
-    };
+    console.log("greenHouse: ", parameterObj, " users :", CampusUsers);
+    if (total2022 > 0 && total2023 > 0) {
+      addParameter(parameterObj);
+    }
 
-    // Store the parameters in the context
-    addParameter([parameter2022, parameter2023]);
 
-    // Navigate to the next page
     navigate("/form/renewable");
   };
 
@@ -190,19 +192,19 @@ function GreenHouse() {
         <br />
         <br />
         <div className="flex justify-between mt-4">
-        <button
-          onClick={handleClick}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-        >
-          Next
-        </button>
-        <button
-          onClick={() => navigate('/form/waste')}
-          className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-gray"
-        >
-          Go Back
-        </button>
-      </div>
+          <button
+            onClick={handleClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
+          >
+            Next
+          </button>
+          <button
+            onClick={() => navigate("/form/waste")}
+            className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-gray"
+          >
+            Go Back
+          </button>
+        </div>
       </form>
     </div>
   );

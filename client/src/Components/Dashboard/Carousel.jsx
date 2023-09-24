@@ -1,4 +1,5 @@
 import React from "react";
+import Img1 from "./assets/coll.jpg"
 
 const Carousel = () => {
   return (
@@ -11,7 +12,7 @@ const Carousel = () => {
         {/* Item 1 */}
         <div className="hidden duration-700 ease-in-out" data-carousel-item>
           <img
-            src="https://img.collegepravesh.com/2015/12/JIIT-Noida.jpg"
+            src={Img1}
             className="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
             alt="Slide 1"
           />

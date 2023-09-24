@@ -5,8 +5,13 @@ const collegeSchema = new mongoose.Schema({
   name: String,
   city: String,
   state: String,
-  collegeAddress:String,
-  parameters: [{ type: Schema.Types.ObjectId, ref: "Parameter" }], 
+  collegeAddress: String,
+  parameters: [
+    {
+      name: String,
+      Score: Number,
+    },
+  ],
 });
 
 const College = mongoose.model("College", collegeSchema);

@@ -38,26 +38,26 @@ export const Dashboard = () => {
   const TestmonialsObj={
 
   };
-  const counters = document.querySelectorAll('.value');
-const speed = 200;
+//   const counters = document.querySelectorAll('.value');
+// const speed = 200;
 
-counters.forEach( counter => {
-   const animate = () => {
-      const value = +counter.getAttribute('akhi');
-      const data = +counter.innerText;
+// counters.forEach( counter => {
+//    const animate = () => {
+//       const value = +counter.getAttribute('akhi');
+//       const data = +counter.innerText;
      
-      const time = value / speed;
-     if(data < value) {
-          counter.innerText = Math.ceil(data + time);
-          setTimeout(animate, 1);
-        }else{
-          counter.innerText = value;
-        }
+//       const time = value / speed;
+//      if(data < value) {
+//           counter.innerText = Math.ceil(data + time);
+//           setTimeout(animate, 1);
+//         }else{
+//           counter.innerText = value;
+//         }
      
-   }
+//    }
    
-   animate();
-});
+//    animate();
+// });
 
   return (
     <>
@@ -189,7 +189,7 @@ counters.forEach( counter => {
             </div>
 
             <div className="flex flex-col mt-32 ">
-              <div className=" h-[200px] w-[350px] ">
+              <div className=" h-[150px] w-[350px] ">
                 <a
                   href="#"
                   className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700"
@@ -197,12 +197,8 @@ counters.forEach( counter => {
                   {/* <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                     Noteworthy technology acquisitions 2021
                   </h5> */}
-                   <div className="value text-2xl font-semibold" akhi="2500"> 0   <span>+ </span></div>
-                  
-                  <p className="font-normal text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology acquisitions of
-                    2021 so far, in reverse chronological order.
-                  </p>
+                   <div className="text-2xl font-semibold" >1500 +</div>
+                  Student surveyed
                 </a>
               </div>
               <div className=" h-[100px] w-[350px]">

@@ -1,6 +1,6 @@
-import  { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useParameterContext } from './Context/Parameters';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useParameterContext } from "./Context/Parameters";
 
 function CampusUsers() {
   const navigate = useNavigate();
@@ -27,7 +27,6 @@ function CampusUsers() {
   const handleClick = (e) => {
     e.preventDefault();
 
-    // Calculate the total for 2022
     const total2022 =
       formData.student1 +
       formData.employee1 +
@@ -35,7 +34,6 @@ function CampusUsers() {
       formData.fullStudent1 +
       formData.fullemployee1;
 
-    // Calculate the total for 2023
     const total2023 =
       formData.student2 +
       formData.employee2 +
@@ -43,34 +41,25 @@ function CampusUsers() {
       formData.fullStudent2 +
       formData.fullemployee2;
 
-    // Create the parameter object for 2022 and 2023
-    const parameter2022 = {
-      name: '2022 Campus Users',
-      year: 2022,
-      Score: total2022,
-    };
+    const totalUsers = total2022 + total2023;
+    console.log("tot :",totalUsers,"t2 :",total2022,"t3 :",total2023);
+    addCampusUsers(totalUsers);
 
-    const parameter2023 = {
-      name: '2023 Campus Users',
-      year: 2023,
-      Score: total2023,
-    };
-
-    // Store the parameters in the context
-    addCampusUsers([parameter2022, parameter2023]);
-
-    // Navigate to the next page
-    navigate('/form/waste');
+    navigate("/form/waste");
   };
 
   return (
     <div className="bg-white p-4 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-4 mt-4">Weighted Campus Users Form</h2>
+      <h2 className="text-2xl font-bold mb-4 mt-4">
+        Weighted Campus Users Form
+      </h2>
       <form>
         <h3 className="text-lg font-semibold mb-4">
           Enter the following data for 2022
         </h3>
-        <label className="block mb-2">Number of students resident on-site:</label>
+        <label className="block mb-2">
+          Number of students resident on-site:
+        </label>
         <input
           type="number"
           name="student1"
@@ -120,9 +109,7 @@ function CampusUsers() {
         <br />
         <br />
 
-        <label className="block mb-2">
-          Full-time equivalent of employees
-        </label>
+        <label className="block mb-2">Full-time equivalent of employees</label>
         <input
           type="number"
           name="fullemployee1"
@@ -137,7 +124,9 @@ function CampusUsers() {
           Enter the following data for 2023
         </h3>
         <br />
-        <label className="block mb-2">Number of students resident on-site:</label>
+        <label className="block mb-2">
+          Number of students resident on-site:
+        </label>
         <input
           type="number"
           name="student2"
@@ -199,19 +188,19 @@ function CampusUsers() {
         <br />
 
         <div className="flex justify-between mt-4">
-        <button
-          onClick={handleClick}
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
-        >
-          Next
-        </button>
-        <button
-          onClick={() => navigate('/form')}
-          className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-gray"
-        >
-          Go Back
-        </button>
-      </div>
+          <button
+            onClick={handleClick}
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue"
+          >
+            Next
+          </button>
+          <button
+            onClick={() => navigate("/form")}
+            className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-gray"
+          >
+            Go Back
+          </button>
+        </div>
       </form>
     </div>
   );

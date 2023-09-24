@@ -23,37 +23,36 @@ function Sustainable() {
     });
   };
 
+  function getScore(str) {
+    if (str) {
+      return 5;
+    } else {
+      return 0;
+    }
+  }
+
   const handleClick = () => {
-    // Sum up the data from the form and create a parameter object
+    // Quantity: {
+    //   studentResearchProgram: formData.studentResearchProgram,
+    //   staffResearchProgram: formData.staffResearchProgram,
+    //   sustainableIndustries: formData.sustainableIndustries,
+    //   exemplaryPerformance: formData.exemplaryPerformance,
+    //   investmentFunds: formData.investmentFunds,
+    //   totalBudget: formData.totalBudget,
+    // },
+
+    let score =
+      getScore(formData.studentResearchProgram) +
+      getScore(formData.staffResearchProgram);
+
     const sustainableData = {
-      name: "Sustainable Data",
-      // Add other properties here based on your parameter schema
-      // Example:
-      // year: 2022,
-      // Score: 0, // Set an initial score
-      // ...
-      // For Quantity, you can add your data as needed
-      Quantity: {
-        studentResearchProgram: formData.studentResearchProgram,
-        staffResearchProgram: formData.staffResearchProgram,
-        sustainableIndustries: formData.sustainableIndustries,
-        exemplaryPerformance: formData.exemplaryPerformance,
-        investmentFunds: formData.investmentFunds,
-        totalBudget: formData.totalBudget,
-      },
-      // Add other properties based on your parameter schema
-      // Example:
-      // Weight: {
-      //   weight: 0,
-      //   units: 'kg',
-      // },
+      name: "Sustainable",
+      Score: score,
     };
     console.log("sustainableData :", sustainableData);
 
-    // Add the parameter to the context
     addParameter(sustainableData);
 
-    // Navigate to the next page
     navigate("/form/water");
   };
 
@@ -167,7 +166,7 @@ function Sustainable() {
           Next
         </button>
         <button
-          onClick={() => navigate('/form/renewable')}
+          onClick={() => navigate("/form/renewable")}
           className="bg-gray-400 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-gray"
         >
           Go Back
