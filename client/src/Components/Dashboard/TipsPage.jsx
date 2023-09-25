@@ -30,7 +30,7 @@ export const TipsPage = () => {
   ];
   return (
     <>
-      <h1 className="text-center font-bold text-3xl mb-4 ">Tips to improve</h1>
+      <h1 className="text-center font-bold text-3xl mb-4 ml-32 underline underline-offset-4">Tips to improve</h1>
       <div className="flex gap-4 w-full ml-[15%] mb-12">
         {tipsData.map((item, index) => {
           return (
